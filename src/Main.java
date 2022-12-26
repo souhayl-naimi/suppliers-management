@@ -1,4 +1,4 @@
-import Repository.SupplierRepository;
+import repository.SupplierRepository;
 import entities.Supplier;
 import utils.ConsoleMenu;
 
@@ -10,17 +10,17 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-         int option;
+        int option;
 
         //Instantiating the supplier's repository
         SupplierRepository supplierRepository = new SupplierRepository();
 
         //Instantiating dummy data and feeding the database
-        Supplier s1 = new Supplier("A1B2C3","Carrefour","Casablanca");
-        Supplier s2 = new Supplier("D4E5F6","Marjane","Bouskoura");
-        Supplier s3 = new Supplier("G7H8I9","BIM","Rabat");
+        Supplier s1 = new Supplier("A1B2C3", "Carrefour", "Casablanca");
+        Supplier s2 = new Supplier("D4E5F6", "Marjane", "Bouskoura");
+        Supplier s3 = new Supplier("G7H8I9", "BIM", "Rabat");
 
-        ArrayList<Supplier> dbSuppliers= new ArrayList<Supplier>();
+        ArrayList<Supplier> dbSuppliers = new ArrayList<Supplier>();
         dbSuppliers.add(s1);
         dbSuppliers.add(s2);
         dbSuppliers.add(s3);
@@ -54,18 +54,20 @@ public class Main {
             }
 
         }}while(option != 0);*/
-      //  option = (char) System.in.read();
+        //  option = (char) System.in.read();
 
-        do{
+        //Interacting with the business rules
+        do {
             option = Integer.parseInt(scanner.next());
-            if(option == 1){
-            supplierRepository.listSuppliers(dbSuppliers);
-        } else if(option == 2){
+
+            if (option == 1) {
+                supplierRepository.listSuppliers(dbSuppliers);
+            } else if (option == 2) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
                 String city = in.readLine();
-                supplierRepository.listSuppliersByCity(dbSuppliers,city);
+                supplierRepository.listSuppliersByCity(dbSuppliers, city);
 
-        }else if(option == 3){
+            } else if (option == 3) {
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
@@ -78,19 +80,22 @@ public class Main {
                 System.out.printf("Enter the supplier's city:");
                 String city = in.readLine();
 
-                Supplier supplier = new Supplier(code,designation,city);
+                Supplier supplier = new Supplier(code, designation, city);
 
                 dbSuppliers.add(supplier);
 
-                System.out.println(supplier.toString()+"  "+"is added with succes");
+                System.out.println(supplier.toString() + "  " + "is added with succes");
 
-        }else if(option == 4){
+            } else if (option == 4) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+
                 System.out.printf("Enter the supplier's code:");
                 String code = in.readLine();
-                supplierRepository.deleteSupplier(dbSuppliers,code);
 
-        }}while(option != 0);
+                supplierRepository.deleteSupplier(dbSuppliers, code);
+
+            }
+        } while (option != 0);
 
 
     }
